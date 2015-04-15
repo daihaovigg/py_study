@@ -119,15 +119,45 @@ def now():
   pass
 print now()
 
-#exam
+#exam1:编写一个decorator，能在函数调用的前后打印出'begin call'和'end call'的日志
 def log(func):        #define a decorator
   @functools.wraps(func)
   def wrapper(*args,**kw):
     print 'begin call %s()' % func.__name__     #attention : __name__ is make up of two _
-    return func(*args,**kw)
-  print 'end call %s()' % func.__name__
+    func(*args,**kw)
+    print 'end call %s()' % func.__name__
   return wrapper
 @log
 def now():
   print 'calling'
-print now()
+  return 1  #return has no effect to func
+now()
+
+#exam2:写出一个@log的decorator，使它既支持不带参数又可以带参数
+def log(title = None):
+  def decorator(func):
+    if title is None:
+      print '%s()' % func.__name__
+      return func
+    else :
+      def wrapper(*args,**kw):
+        print '%s %s()' % (title,func.__name__)
+        return func(*args,**kw)
+      return wrapper
+  return decorator
+@log()
+def f1():
+  print 'no parameter'
+f1()
+@log('call')
+def f2():
+  print 'parameter'
+f2()
+
+
+#Partial function 偏函数
+int2=functools.partial(int,base=2)
+print int2('11010101')  #int2(x) = int(x,base=2)
+
+max2=functools.partial(max,10)
+print max2(5,6,7)   #max2(5,6,7)=max(10,5,6,7)
