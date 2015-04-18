@@ -147,3 +147,4 @@ Comi=type('Comi',(object,),dict(print_info=fn))
 Comi().print_info('dai')
 
 #metaclass
+#pass this time
