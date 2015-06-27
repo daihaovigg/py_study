@@ -1,0 +1,9 @@
+('/home/dai/py_study/web/exe/dist/app',
+ True,
+ False,
+ None,
+ None,
+ [],
+ None,
+ False,
+ 1432826694)
